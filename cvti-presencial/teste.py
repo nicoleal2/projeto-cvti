@@ -19,9 +19,26 @@ layout = [
     ]
 janela = sg.Window('Agendamento de Aulas').Layout(layout)
 #função que lida com o salvamento  
+def switch(lang):
+    if lang == "m1":
+        return "Manha 1"
+    elif lang == "m2":
+        return "Manha 2"
+    elif lang == "t1":
+        return "Tarde 1"
+    elif lang == "t2":
+         return "Tarde 2"
+    elif lang == "n1":
+        return "Noite 1"
+    elif lang == "n2":
+        return "Noite 2"
 def salvar_dados(valores):
-    arquivo = open("dados.csv", "w")
-    arquivo.write("Horarios escolhidos:"+ str(valores))
+    arquivo = open("dados.csv", "a")
+    arquivo.write("Horarios escolhidos:\n")
+    op =['m1', 'm2', 't1', 't2', 'n1', 'n2']
+    for val in op:
+        if valores[val]:
+            arquivo.write(switch(val)+'\n')
     arquivo.close()
     sg.popup("Aula agendada com sucesso!")
 
@@ -32,5 +49,4 @@ while True:
         break
     elif evento == 'Ok!':
         salvar_dados(valores)
-
 
